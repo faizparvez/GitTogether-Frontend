@@ -1,1 +1,60 @@
+/* Using the correct import statement for your project setup */
 @import "tailwindcss";
+
+/* --- All Custom Animations and Styles --- */
+
+/* Animation for the floating developer cards in the Hero section */
+@keyframes subtle-float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-subtle-float {
+  animation: subtle-float 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+
+/* NEW, CORRECTED ANIMATION for the headline word-swapping */
+@keyframes wordSlide {
+  0% { transform: translateY(30px); opacity: 0; }
+  10% { transform: translateY(0); opacity: 1; }
+  90% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-30px); opacity: 0; }
+}
+
+.word-slide-animation {
+    /* The duration should be slightly less than the JS interval to prevent visual glitches */
+    animation: wordSlide 2.5s ease-in-out infinite;
+}
+
+
+/* Styles for Scroll-Triggered Animations (Workflow & Testimonials Sections) */
+.animated-section-card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.section-in-view .animated-section-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Stagger the animation for a more dynamic effect */
+.section-in-view .animated-section-card:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.section-in-view .animated-section-card:nth-child(3) {
+  transition-delay: 0.4s;
+}
+
+
+/* Styles for the Sticky Header on Scroll */
+.header-scrolled {
+  background-color: rgba(249, 250, 251, 0.5);
+  backdrop-filter: blur(16px);
+  border-bottom-width: 1px;
+  border-color: #E5E7EB; /* theme.colors.gray.200 */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
