@@ -1,67 +1,40 @@
-// Import necessary hooks and libraries from React, Redux, and React Router
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
-// Import your project's constants and Redux actions
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../redux/userSlice";
 
 // --- The Final 'GitTogether' Header Component ---
 const Header = () => {
   // --- State and Hooks ---
-
-  // Get the current user state from the Redux store
   const user = useSelector((store) => store.user);
-
-  // Hooks for dispatching Redux actions and programmatic navigation
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // State to track if the page has been scrolled, for the sticky header effect
   const [isScrolled, setIsScrolled] = useState(false);
 
   // --- Effects ---
-
-  // This effect adds a scroll event listener to the window.
-  // It updates the 'isScrolled' state based on the scroll position.
   useEffect(() => {
     const handleScroll = () => {
-      // If the user has scrolled more than 10px, set isScrolled to true
       setIsScrolled(window.scrollY > 10);
     };
-
-    // Add the event listener when the component mounts
     window.addEventListener("scroll", handleScroll);
-
-    // Clean up the event listener when the component unmounts
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // --- API and Event Handlers ---
-
-  // Handles the user logout process
   const handleLogout = async () => {
     try {
-      // Make a POST request to the logout endpoint
       await axios.post(`${BASE_URL}/logout`, {}, { withCredentials: true });
-
-      // Dispatch the Redux action to remove the user from the store
       dispatch(removeUser());
-
-      // Navigate the user back to the homepage
       navigate("/");
     } catch (err) {
-      // In a real app, you might navigate to an error page or show a notification
       console.error("Logout failed:", err);
     }
   };
 
   // --- JSX Rendering ---
-
   return (
-    // The main header container. It's fixed, sticky, and transitions its background.
     <header
       className={`fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300 ease-in-out ${
         isScrolled
@@ -110,26 +83,26 @@ const Header = () => {
         </div>
 
         {/* Center Section: Main Navigation Links */}
-        {/* These links only appear if a user is logged in */}
         {user && (
           <nav className="hidden md:flex items-center gap-8">
+            {/* The navigation links now have increased font size */}
             <Link
               to="/profile"
-              className="relative font-semibold text-gray-600 hover:text-blue-500 group transition-colors duration-300"
+              className="relative font-bold text-gray-800 hover:text-blue-500 group transition-colors duration-300 text-base"
             >
               Profile
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link
               to="/connections"
-              className="relative font-semibold text-gray-600 hover:text-blue-500 group transition-colors duration-300"
+              className="relative font-bold text-gray-800 hover:text-blue-500 group transition-colors duration-300 text-base"
             >
               Connections
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link
               to="/requests"
-              className="relative font-semibold text-gray-600 hover:text-blue-500 group transition-colors duration-300"
+              className="relative font-bold text-gray-800 hover:text-blue-500 group transition-colors duration-300 text-base"
             >
               Requests
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
@@ -148,13 +121,15 @@ const Header = () => {
                   alt={user.firstName}
                   className="w-9 h-9 rounded-full object-cover border-2 border-gray-300"
                 />
-                <span className="font-medium text-gray-700 hidden sm:block">
+                {/* The welcome text now has increased font size */}
+                <span className="font-semibold text-gray-800 hidden sm:block text-base">
                   Welcome, {user.firstName}
                 </span>
               </div>
+              {/* The logout button text now has increased font size */}
               <button
                 onClick={handleLogout}
-                className="bg-gray-200 text-gray-700 font-semibold px-5 py-2 rounded-lg hover:bg-gray-300 transition-colors duration-300"
+                className="font-bold text-blue-600 border border-blue-500/50 rounded-lg px-5 py-2 hover:bg-blue-500/10 transition-colors duration-300 text-base"
               >
                 Logout
               </button>
@@ -164,13 +139,13 @@ const Header = () => {
             <div className="flex items-center space-x-2">
               <Link
                 to="/login"
-                className="text-gray-600 hover:text-blue-500 font-medium px-4 py-2 rounded-lg transition-colors"
+                className="text-gray-800 hover:text-blue-500 font-medium px-4 py-2 rounded-lg transition-colors text-base"
               >
                 Log In
               </Link>
               <Link
                 to="/signup"
-                className="bg-blue-500 text-white font-medium px-5 py-2 rounded-lg hover:bg-blue-600 transition-colors shadow-sm"
+                className="bg-blue-500 text-white font-medium px-5 py-2 rounded-lg hover:bg-blue-600 transition-colors shadow-sm text-base"
               >
                 Sign Up
               </Link>
