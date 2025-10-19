@@ -1,5 +1,3 @@
-import React from "react";
-
 /**
  * UserCard Component - Profile preview card that only shows actual user data
  * Synchronized with form inputs to display real-time changes
