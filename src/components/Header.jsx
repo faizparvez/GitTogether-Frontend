@@ -87,10 +87,10 @@ const Header = () => {
           <nav className="hidden md:flex items-center gap-8">
             {/* The navigation links now have increased font size */}
             <Link
-              to="/profile"
+              to="/feed"
               className="relative font-bold text-gray-800 hover:text-blue-500 group transition-colors duration-300 text-base"
             >
-              Profile
+              Browse
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link
@@ -116,11 +116,13 @@ const Header = () => {
             // If the user is logged in, show their info and a Logout button
             <>
               <div className="flex items-center gap-3">
-                <img
-                  src={user.photoURL}
-                  alt={user.firstName}
-                  className="w-9 h-9 rounded-full object-cover border-2 border-gray-300"
-                />
+                <Link to="/profile">
+                  <img
+                    src={user.photoURL}
+                    alt={user.firstName}
+                    className="w-9 h-9 rounded-full object-cover border-2 border-gray-300 cursor-pointer hover:border-blue-500 transition-colors duration-200"
+                  />
+                </Link>
                 {/* The welcome text now has increased font size */}
                 <span className="font-semibold text-gray-800 hidden sm:block text-base">
                   Welcome, {user.firstName}
@@ -137,17 +139,17 @@ const Header = () => {
           ) : (
             // If the user is logged out, show Log In and Sign Up buttons
             <div className="flex items-center space-x-2">
-              <Link
+              {/* <Link
                 to="/login"
                 className="text-gray-800 hover:text-blue-500 font-medium px-4 py-2 rounded-lg transition-colors text-base"
               >
                 Log In
-              </Link>
+              </Link> */}
               <Link
-                to="/signup"
+                to="/login"
                 className="bg-blue-500 text-white font-medium px-5 py-2 rounded-lg hover:bg-blue-600 transition-colors shadow-sm text-base"
               >
-                Sign Up
+                Log In
               </Link>
             </div>
           )}
