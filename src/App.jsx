@@ -10,6 +10,11 @@ import Requests from "./components/Requests";
 // import Premium from "./components/Premium";
 // import Chat from "./components/Chat";
 import Home from "./components/Home";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import ShippingPolicy from "./components/ShippingPolicy";
+import TermsConditions from "./components/TermsConditions";
+import CancellationRefunds from "./components/CancellationRefunds";
+import ContactUs from "./components/ContactUs";
 
 function App() {
   return (
@@ -22,6 +27,11 @@ function App() {
               {/* route matching our application's root */}
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+              <Route path="/shippingpolicy" element={<ShippingPolicy />} />
+              <Route path="/termsconditions" element={<TermsConditions />} />
+              <Route path="/cancellationrefunds" element={<CancellationRefunds />} />
+              <Route path="/contactus" element={<ContactUs />} />
               <Route path="/feed" element={<Feed />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
