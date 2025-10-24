@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import { createSocketConnection } from "../utils/socket";
+import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
@@ -33,17 +33,17 @@ const Chat = () => {
 //     fetchChatMessages();
 //   }, []);
 
-//   useEffect(() => {
-//     if (!userId) {
-//       return;
-//     }
-//     const socket = createSocketConnection();
-//     // As soon as the page loaded, the socket connection is made and joinChat event is emitted
-//     socket.emit("joinChat", {
-//       firstName: user.firstName,
-//       userId,
-//       targetUserId,
-//     });
+  useEffect(() => {
+    // if (!userId) {
+    //   return;
+    // }
+    const socket = createSocketConnection();
+    // As soon as the page loaded, the socket connection is made and joinChat event is emitted
+    // socket.emit("joinChat", {
+    //   firstName: user.firstName,
+    //   userId,
+    //   targetUserId,
+    // });
 
 //     socket.on("messageReceived", ({ firstName, lastName, text }) => {
 //       console.log(firstName + " :  " + text);
@@ -53,7 +53,7 @@ const Chat = () => {
 //     return () => {
 //       socket.disconnect();
 //     };
-//   }, [userId, targetUserId]);
+  }, [userId, targetUserId]);
 
 //   const sendMessage = () => {
 //     const socket = createSocketConnection();
