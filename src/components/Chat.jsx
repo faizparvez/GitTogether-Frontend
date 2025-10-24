@@ -34,9 +34,9 @@ const Chat = () => {
   //   }, []);
 
   useEffect(() => {
-    // if (!userId) {
-    //   return;
-    // }
+    if (!userId) {
+      return;
+    }
     const socket = createSocketConnection();
     // As soon as the page loads, the socket connection is made and joinChat event is emitted
     socket.emit("joinChat", {
@@ -45,10 +45,11 @@ const Chat = () => {
       targetUserId,
     });
 
-    //     socket.on("messageReceived", ({ firstName, lastName, text }) => {
-    //       console.log(firstName + " :  " + text);
-    //       setMessages((messages) => [...messages, { firstName, lastName, text }]);
-    //     });
+    // listen to the message sent by the server
+    socket.on("messageReceived", ({ firstName, lastName, text }) => {
+      console.log(firstName + " :  " + text);
+      setMessages((messages) => [...messages, { firstName, lastName, text }]);
+    });
 
     // when the component unmounts
     return () => {
@@ -56,17 +57,17 @@ const Chat = () => {
     };
   }, [userId, targetUserId]);
 
-    const sendMessage = () => {
-      const socket = createSocketConnection();
-      socket.emit("sendMessage", {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        userId,
-        targetUserId,
-        text: newMessage,
-      });
-      setNewMessage("");
-    };
+  const sendMessage = () => {
+    const socket = createSocketConnection();
+    socket.emit("sendMessage", {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      userId,
+      targetUserId,
+      text: newMessage,
+    });
+    setNewMessage("");
+  };
 
   return (
     <div className="w-3/4 mx-auto border border-gray-600 m-5 h-[70vh] flex flex-col">
