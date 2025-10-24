@@ -12,26 +12,27 @@ const Chat = () => {
   const user = useSelector((store) => store.user);
   const userId = user?._id;
 
-  //   const fetchChatMessages = async () => {
-  //     const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
-  //       withCredentials: true,
-  //     });
+  const fetchChatMessages = async () => {
+    const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
+      withCredentials: true,
+    });
 
-  //     console.log(chat.data.messages);
+    console.log(chat.data.messages);
 
-  //     const chatMessages = chat?.data?.messages.map((msg) => {
-  //       const { senderId, text } = msg;
-  //       return {
-  //         firstName: senderId?.firstName,
-  //         lastName: senderId?.lastName,
-  //         text,
-  //       };
-  //     });
-  //     setMessages(chatMessages);
-  //   };
-  //   useEffect(() => {
-  //     fetchChatMessages();
-  //   }, []);
+    const chatMessages = chat?.data?.messages.map((msg) => {
+      const { senderId, text } = msg;
+      return {
+        firstName: senderId?.firstName,
+        lastName: senderId?.lastName,
+        text,
+      };
+    });
+    setMessages(chatMessages);
+  };
+
+  useEffect(() => {
+    fetchChatMessages();
+  }, []);
 
   useEffect(() => {
     if (!userId) {
