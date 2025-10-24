@@ -4,23 +4,22 @@ import { useEffect, useState } from "react";
 import { plans } from "../utils/constants";
 
 const Billing = () => {
-  // const [isUserPremium, setIsUserPremium] = useState(false);
+  const [isUserPremium, setIsUserPremium] = useState(false);
 
-  // useEffect(() => {
-  //   verifyPremiumUser();
-  // }, []);
+  useEffect(() => {
+    verifyPremiumUser();
+  }, []);
 
-  // const verifyPremiumUser = async () => {
-  //   const res = await axios.get(BASE_URL + "/premium/verify", {
-  //     withCredentials: true,
-  //   });
+  const verifyPremiumUser = async () => {
+    const res = await axios.get(BASE_URL + "/premium/verify", {
+      withCredentials: true,
+    });
 
-  //   if (res.data.isPremium) {
-  //     setIsUserPremium(true);
-  //   }
-  // };
+    if (res.data.isPremium) {
+      setIsUserPremium(true);
+    }
+  };
 
-  const isUserPremium = false;
   const handleBuyClick = async (type) => {
     const order = await axios.post(
       BASE_URL + "/payment/create",
@@ -47,7 +46,7 @@ const Billing = () => {
       theme: {
         color: "#6366f1",
       },
-      // handler: verifyPremiumUser,
+      handler: verifyPremiumUser,
     };
 
     const rzp = new window.Razorpay(options);
