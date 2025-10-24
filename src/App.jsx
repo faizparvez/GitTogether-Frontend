@@ -7,8 +7,7 @@ import appStore from "./redux/appStore";
 import Feed from "./components/Feed";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
-// import Premium from "./components/Premium";
-// import Chat from "./components/Chat";
+import Chat from "./components/Chat";
 import Home from "./components/Home";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import ShippingPolicy from "./components/ShippingPolicy";
@@ -38,8 +37,7 @@ function App() {
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
               <Route path="/billing" element={<Billing />} />
-              {/* <Route path="/premium" element={<Premium />} /> */}
-              {/* <Route path="/chat/:targetUserId" element={<Chat />} /> */}
+              <Route path="/chat/:targetUserId" element={<Chat />} />
             </Route>
           </Routes>
         </BrowserRouter>
