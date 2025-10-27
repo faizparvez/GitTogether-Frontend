@@ -15,6 +15,7 @@ import TermsConditions from "./components/TermsConditions";
 import CancellationRefunds from "./components/CancellationRefunds";
 import ContactUs from "./components/ContactUs";
 import Billing from "./components/Billing";
+import AboutUs from "./components/AboutUs";
 
 function App() {
   return (
@@ -27,11 +28,12 @@ function App() {
               {/* route matching our application's root */}
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/shippingpolicy" element={<ShippingPolicy />} />
               <Route path="/termsconditions" element={<TermsConditions />} />
               <Route path="/cancellationrefunds" element={<CancellationRefunds />} />
-              <Route path="/contactus" element={<ContactUs />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/about" element={<AboutUs />} />
               <Route path="/feed" element={<Feed />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
