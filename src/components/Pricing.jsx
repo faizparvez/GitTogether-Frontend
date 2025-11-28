@@ -253,7 +253,7 @@ const Pricing = () => {
 
         {/* Footer notes */}
         <div className="text-center mt-16 space-y-3">
-  <p className="text-md text-[#010D3E] font-medium">
+  <p className="text-md text-[#000000] font-medium">
     All plans include a 7-day money-back guarantee. Cancel anytime, no questions asked.
   </p>
   <p className="text-md text-[#000000] ">
