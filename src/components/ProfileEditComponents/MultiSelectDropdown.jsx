@@ -62,8 +62,14 @@ const MultiSelectDropdown = ({
           onClick={() => setIsOpen(!isOpen)}
           disabled={selected.length >= maxItems}
           className={`w-full flex items-center justify-between px-3 py-2 rounded-md border bg-[#FFF7F2] text-[#010D3E] text-sm transition-colors 
-            ${error ? "border-red-500" : "border-[#FAC67A] hover:border-[#ff734d]"}
-            ${selected.length >= maxItems ? "opacity-50 cursor-not-allowed" : ""}`}
+            ${
+              error
+                ? "border-red-500"
+                : "border-[#FAC67A] hover:border-[#ff734d]"
+            }
+            ${
+              selected.length >= maxItems ? "opacity-50 cursor-not-allowed" : ""
+            }`}
         >
           <span className="text-[#c26328]">
             {selected.length >= maxItems
@@ -105,6 +111,19 @@ const MultiSelectDropdown = ({
                   No options found
                 </div>
               )}
+
+              {/* ⭐ NEW: Add Custom Option */}
+              {search.trim() !== "" &&
+                !options.includes(search.trim()) &&
+                !selected.includes(search.trim()) && (
+                  <button
+                    type="button"
+                    onClick={() => handleSelect(search.trim())}
+                    className="w-full text-left px-4 py-2 text-sm text-[#d64000] bg-[#FFE8D6] hover:bg-[#FAC67A]/40 transition-colors border-t border-[#FAC67A]"
+                  >
+                    ➕ Add "{search.trim()}"
+                  </button>
+                )}
             </div>
           </div>
         )}

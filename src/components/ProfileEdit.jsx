@@ -120,9 +120,13 @@ const ProfilePage = () => {
         }
       });
 
-      const response = await axios.patch(`${BASE_URL}/profile/edit`, dataToSend, {
-        withCredentials: true,
-      });
+      const response = await axios.patch(
+        `${BASE_URL}/profile/edit`,
+        dataToSend,
+        {
+          withCredentials: true,
+        }
+      );
 
       setToast({
         type: "success",
@@ -151,18 +155,17 @@ const ProfilePage = () => {
       <div className="relative max-w-4xl mx-auto px-6">
         {/* Header */}
         <div className="mb-12 text-center space-y-4">
-  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-[#010D3E] max-w-4xl mx-auto">
-    Complete Your{" "}
-    <span className="bg-gradient-to-r from-[#ff734d] to-[#d64000] text-transparent bg-clip-text">
-      Profile
-    </span>
-  </h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-[#010D3E] max-w-4xl mx-auto">
+            Complete Your{" "}
+            <span className="bg-gradient-to-r from-[#ff734d] to-[#d64000] text-transparent bg-clip-text">
+              Profile
+            </span>
+          </h1>
 
-  <p className="text-lg text-[#010D3E] max-w-2xl mx-auto leading-relaxed">
-    Tell us more about yourself to help find your perfect match.
-  </p>
-</div>
-
+          <p className="text-lg text-[#010D3E] max-w-2xl mx-auto leading-relaxed">
+            Tell us more about yourself to help find your perfect match.
+          </p>
+        </div>
 
         <div className="space-y-8">
           {/* Basic Information */}

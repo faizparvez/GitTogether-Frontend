@@ -32,7 +32,9 @@ function LoadingView() {
         <div className="flex justify-center">
           <div className="w-12 h-12 border-4 border-[rgba(241,241,241,1)] border-t-[rgba(255,115,77,0.9)] rounded-full animate-spin"></div>
         </div>
-        <p className="text-sm text-[#010D3E]">Loading your membership status...</p>
+        <p className="text-sm text-[#010D3E]">
+          Loading your membership status...
+        </p>
       </div>
     </div>
   );
@@ -102,14 +104,19 @@ function PlanCard({ plan, onBuy }) {
       )}
       style={{
         backgroundColor: plan.popular ? "#d64000" : "#FFFFFF",
-        border: plan.popular ? "2px solid #d64000" : "1px solid rgba(255,115,77,0.15)",
+        border: plan.popular
+          ? "2px solid #d64000"
+          : "1px solid rgba(255,115,77,0.15)",
       }}
     >
       {/* Popular badge */}
       {plan.popular && (
         <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
           <div className="px-4 py-1.5 rounded-full text-sm font-semibold bg-[#d64000] text-white border-2 border-white shadow-lg">
-            <motion.span animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity }}>
+            <motion.span
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
               ⭐ Most Popular
             </motion.span>
           </div>
@@ -118,27 +125,51 @@ function PlanCard({ plan, onBuy }) {
 
       {/* Header */}
       <div className="mb-6">
-        <h3 className={cn("text-xl font-bold mb-1", plan.popular ? "text-white" : "text-[#010D3E] opacity-90")}>
+        <h3
+          className={cn(
+            "text-xl font-bold mb-1",
+            plan.popular ? "text-white" : "text-[#010D3E] opacity-90"
+          )}
+        >
           {plan.name}
         </h3>
-        <p className={cn("text-sm", plan.popular ? "text-white/90" : "text-[#010D3E] opacity-70")}>
+        <p
+          className={cn(
+            "text-sm",
+            plan.popular ? "text-white/90" : "text-[#010D3E] opacity-70"
+          )}
+        >
           {plan.duration}
         </p>
       </div>
 
       {/* Price */}
       <div className="flex flex-col items-baseline gap-1 mb-8">
-        <span className={cn("text-5xl font-bold tracking-tighter leading-none", plan.popular ? "text-white" : "text-[#010D3E]")}>
+        <span
+          className={cn(
+            "text-5xl font-bold tracking-tighter leading-none",
+            plan.popular ? "text-white" : "text-[#010D3E]"
+          )}
+        >
           {plan.price}
         </span>
-        <span className={cn("tracking-tight font-semibold text-sm", plan.popular ? "text-white/80" : "text-[#010D3E] opacity-70")}>
+        <span
+          className={cn(
+            "tracking-tight font-semibold text-sm",
+            plan.popular ? "text-white/80" : "text-[#010D3E] opacity-70"
+          )}
+        >
           /month
         </span>
       </div>
 
       {/* CTA */}
       <motion.button
-        whileHover={{ scale: 1.02, y: -2, transition: { duration: 0.12, ease: "easeOut" } }}
+        whileHover={{
+          scale: 1.02,
+          y: -2,
+          transition: { duration: 0.12, ease: "easeOut" },
+        }}
         whileTap={{ scale: 0.98 }}
         onClick={() => onBuy(plan.type)}
         className={cn(
@@ -155,8 +186,17 @@ function PlanCard({ plan, onBuy }) {
       <ul className="flex flex-col gap-4">
         {plan.features.map((feature, idx) => (
           <li key={idx} className="flex items-start gap-3 text-sm">
-            <CheckIcon className="h-5 w-5 flex-shrink-0 mt-0.5" strokeColor={plan.popular ? "#ffffff" : "#ff734d"} />
-            <span className={plan.popular ? "text-white/95 leading-relaxed" : "text-[#010D3E] leading-relaxed"}>
+            <CheckIcon
+              className="h-5 w-5 flex-shrink-0 mt-0.5"
+              strokeColor={plan.popular ? "#ffffff" : "#ff734d"}
+            />
+            <span
+              className={
+                plan.popular
+                  ? "text-white/95 leading-relaxed"
+                  : "text-[#010D3E] leading-relaxed"
+              }
+            >
               {feature}
             </span>
           </li>
@@ -177,7 +217,9 @@ const Pricing = () => {
 
   const verifyPremiumUser = async () => {
     try {
-      const res = await axios.get(BASE_URL + "/premium/verify", { withCredentials: true });
+      const res = await axios.get(BASE_URL + "/premium/verify", {
+        withCredentials: true,
+      });
       if (res.data.isPremium) {
         setIsUserPremium(true);
       }
@@ -230,17 +272,25 @@ const Pricing = () => {
   /* Pricing plans view (non-premium users) */
   return (
     <section className="py-20 relative overflow-hidden bg-gradient-to-b from-[#FFE8D6] to-[#bc6a30]">
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-5 space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-5 space-y-4"
+        >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-[#010D3E] max-w-4xl mx-auto">
             Choose Your{" "}
-            <span className="bg-gradient-to-r from-[#ff734d] to-[#d64000] text-transparent bg-clip-text">Developer Journey</span>
+            <span className="bg-gradient-to-r from-[#ff734d] to-[#d64000] text-transparent bg-clip-text">
+              Developer Journey
+            </span>
           </h2>
 
           <p className="text-lg text-[#010D3E] max-w-2xl mx-auto leading-relaxed">
-            Unlock premium features and accelerate your networking with fellow developers. Start free, upgrade when you're ready.
+            Unlock premium features and accelerate your networking with fellow
+            developers. Start free, upgrade when you're ready.
           </p>
         </motion.div>
 
@@ -253,14 +303,14 @@ const Pricing = () => {
 
         {/* Footer notes */}
         <div className="text-center mt-16 space-y-3">
-  <p className="text-md text-[#000000] font-medium">
-    All plans include a 7-day money-back guarantee. Cancel anytime, no questions asked.
-  </p>
-  <p className="text-md text-[#000000] ">
-    Secure payments powered by Razorpay
-  </p>
-</div>
-
+          <p className="text-md text-[#000000] font-medium">
+            All plans include a 7-day money-back guarantee. Cancel anytime, no
+            questions asked.
+          </p>
+          <p className="text-md text-[#000000] ">
+            Secure payments powered by Razorpay
+          </p>
+        </div>
       </div>
     </section>
   );

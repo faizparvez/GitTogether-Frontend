@@ -52,52 +52,81 @@ export const plans = [
 ];
 
 export const SKILLS_OPTIONS = [
+  // Frontend
   "React",
-  "Vue",
-  "Angular",
   "Next.js",
   "TypeScript",
+  "Tailwind CSS",
+
+  // Backend
   "Node.js",
+  "Express.js",
   "Python",
-  "Java",
-  "Go",
-  "Ruby",
+  "Django",
+
+  // Databases
   "MongoDB",
   "PostgreSQL",
   "MySQL",
-  "Redis",
+
+  // DevOps & Cloud
   "Docker",
   "Kubernetes",
   "AWS",
-  "CI/CD",
-  "GraphQL",
+
+  // APIs & Architecture
   "REST APIs",
+  "GraphQL",
+  "System Design",
+
+  // Mobile
+  "React Native",
+  "Flutter",
+
+  // AI / Data
+  "Machine Learning",
+  "Data Analysis",
 ];
 
 export const INTERESTS_OPTIONS = [
+  // Technical
   "AI/ML",
-  "Web3",
-  "Mobile Dev",
-  "Open Source",
+  "Cloud Computing",
   "DevOps",
-  "Design",
-  "Photography",
-  "Gaming",
-  "Music",
-  "Coffee",
-  "Hiking",
-  "Travel",
+  "System Design",
+  "Open Source Contributions",
+  "UI/UX Design",
+  "Web Development",
+  "Mobile App Development",
+  "Data Science",
+  "Cybersecurity",
+  "Blockchain",
+  "Product Development",
+  "Entrepreneurship",
+  "Hackathons",
+
+  // Non-Technical (Premium, Modern)
   "Fitness",
+  "Travel",
+  "Film & Cinema",
+  "Photography",
+  "Music",
   "Cooking",
   "Reading",
+  "Creative Writing",
+  "Gaming",
+  "Coffee",
 ];
 
 export const LOOKING_FOR_OPTIONS = [
   "Project Partner",
   "Co-founder",
+  "Mentor",
+  "Mentee",
   "Friend",
-  "Freelance Collaboration",
   "Networking",
+  "Open Source Contributor",
+  "Freelance Collaboration",
 ];
 
 export const EXPERIENCE_LEVELS = [
