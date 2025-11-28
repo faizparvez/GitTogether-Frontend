@@ -78,19 +78,19 @@ const Header = () => {
             <nav className="absolute left-1/2 hidden -translate-x-1/2 transform items-center gap-8 md:flex">
                 <a
                 href="#product"
-                className="font-medium text-black/60 transition-colors duration-300 hover:text-[#ff734d]"
+                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
               >
                 Product
               </a>
                 <a
                 href="#workflow"
-                className="font-medium text-black/60 transition-colors duration-300 hover:text-[#ff734d]"
+                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
               >
                 Workflow
               </a>
               <a
                 href="#testimonials"
-                className="font-medium text-black/60 transition-colors duration-300 hover:text-[#ff734d]"
+                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
               >
                 Testimonials
               </a>
@@ -99,25 +99,25 @@ const Header = () => {
             <nav className="absolute left-1/2 hidden -translate-x-1/2 transform items-center gap-8 md:flex">
                 <Link
                 to="/feed"
-                className="font-medium text-black/60 transition-colors duration-300 hover:text-[#ff734d]"
+                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
               >
                 Browse
               </Link>
               <Link
                 to="/connections"
-                className="font-medium text-black/60 transition-colors duration-300 hover:text-[#ff734d]"
+                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
               >
                 Connections
               </Link>
               <Link
                 to="/requests"
-                className="font-medium text-black/60 transition-colors duration-300 hover:text-[#ff734d]"
+                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
               >
                 Requests
               </Link>
               <Link
                 to="/pricing"
-                className="font-medium text-black/60 transition-colors duration-300 hover:text-[#ff734d]"
+                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
               >
                 Pricing
               </Link>
