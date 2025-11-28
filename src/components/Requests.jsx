@@ -2,168 +2,217 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../redux/requestSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Requests = () => {
   const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
   const reviewRequest = async (status, _id) => {
     try {
-      const res = await axios.post(
-        BASE_URL + "/request/review/" + status + "/" + _id,
+      await axios.post(
+        `${BASE_URL}/request/review/${status}/${_id}`,
         {},
         { withCredentials: true }
       );
-      // console.log(res);
-      // we pass the request id which we want to remove from the redux store in the dispatch action func
       dispatch(removeRequest(_id));
     } catch (err) {}
   };
 
   const fetchRequests = async () => {
     try {
-      const res = await axios.get(BASE_URL + "/user/requests", {
+      setIsLoading(true);
+      const res = await axios.get(`${BASE_URL}/user/requests`, {
         withCredentials: true,
       });
-      // console.log(res);
       dispatch(addRequests(res?.data?.data));
-    } catch (err) {}
+    } catch (err) {
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
     fetchRequests();
   }, []);
 
-  if (!requests) return null;
-
-  if (requests.length === 0) {
+  // ------------------------------------------------------------
+  // SHIMMER LOADING STATE
+  // ------------------------------------------------------------
+  if (isLoading) {
     return (
-      <div className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 md:px-8 lg:px-12 pt-28 pb-16">
-        {/* Light blue gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-blue-50 to-blue-200"></div>
-        <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-blue-300/50 via-blue-200/30 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-blue-200/60 via-blue-100/40 to-transparent"></div>
-        <div className="absolute top-0 bottom-0 left-0 w-1/4 bg-gradient-to-r from-blue-200/40 via-blue-100/20 to-transparent"></div>
-        <div className="absolute top-0 bottom-0 right-0 w-1/4 bg-gradient-to-l from-blue-200/40 via-blue-100/20 to-transparent"></div>
-        <div className="absolute top-1/4 bottom-1/4 left-1/4 right-1/4 bg-gradient-to-br from-blue-50/60 via-blue-100/30 to-blue-50/40 rounded-full blur-3xl"></div>
-        <div className="absolute top-20 right-20 w-96 h-96 bg-blue-300/20 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-200/25 rounded-full blur-2xl"></div>
+      <div className="min-h-screen bg-gradient-to-b from-[#FFE4D1] to-[#c26328] px-6 pb-20 pt-14">
 
-        <div className="relative z-10 text-center">
-          <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-            <svg
-              className="w-12 h-12 text-blue-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2 2v-5m16 0h-2M4 13h2m13-8l-5 5m0 0l-5-5m5 5v6"
-              />
-            </svg>
-          </div>
-          <h1 className="text-4xl lg:text-5xl font-poppins font-bold text-gray-900 mb-6">
-            No <span className="text-blue-600">Requests</span> Found
-          </h1>
-          <p className="text-xl text-gray-700 mb-8">
-            You don't have any connection requests at the moment.
-          </p>
-          <Link
-            to="/feed"
-            className="bg-blue-600 text-white font-bold px-8 py-4 rounded-xl text-lg shadow-xl shadow-blue-500/25 hover:scale-105 hover:bg-blue-700 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/30"
-          >
-            Discover Developers
-          </Link>
+        {/* Page Heading Shimmer */}
+        <div className="section-heading mb-14 text-center">
+          <div className="h-10 w-80 bg-white/40 rounded-lg mx-auto mb-4 animate-pulse"></div>
+          <div className="h-6 w-[500px] bg-white/30 rounded-lg mx-auto animate-pulse"></div>
         </div>
+
+        {/* Card Shimmer Grid */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div
+              key={i}
+              className="
+                bg-white/50 backdrop-blur-xl border border-white/30 
+                rounded-2xl shadow-lg shadow-orange-200/30 
+                p-6 flex flex-col items-center text-center animate-pulse
+              "
+            >
+              {/* Profile Image Shimmer */}
+              <div className="relative mb-5">
+                <div className="absolute inset-0 w-28 h-28 bg-[#ff734d]/10 blur-2xl rounded-full"></div>
+                <div className="relative w-24 h-24 rounded-full bg-white/60 border-4 border-white/60"></div>
+              </div>
+
+              {/* Name Shimmer */}
+              <div className="h-5 w-40 bg-white/60 rounded-md mb-3"></div>
+
+              {/* Age / Gender Shimmer */}
+              <div className="h-4 w-24 bg-white/40 rounded-md mb-3"></div>
+
+              {/* About text shimmer */}
+              <div className="space-y-2 w-full px-6">
+                <div className="h-3 bg-white/50 rounded-md"></div>
+                <div className="h-3 bg-white/40 rounded-md"></div>
+                <div className="h-3 bg-white/30 rounded-md w-3/4 mx-auto"></div>
+              </div>
+
+              {/* Buttons Shimmer */}
+              <div className="mt-6 w-full flex flex-col gap-3">
+                <div className="w-full h-11 bg-white/60 rounded-lg"></div>
+                <div className="w-full h-11 bg-white/40 rounded-lg"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
     );
   }
 
-  return (
-    <div className="relative min-h-screen overflow-hidden px-6 md:px-8 lg:px-12 pt-28 pb-16">
-      {/* Light blue gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-blue-50 to-blue-200"></div>
-      <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-blue-300/50 via-blue-200/30 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-blue-200/60 via-blue-100/40 to-transparent"></div>
-      <div className="absolute top-0 bottom-0 left-0 w-1/4 bg-gradient-to-r from-blue-200/40 via-blue-100/20 to-transparent"></div>
-      <div className="absolute top-0 bottom-0 right-0 w-1/4 bg-gradient-to-l from-blue-200/40 via-blue-100/20 to-transparent"></div>
-      <div className="absolute top-1/4 bottom-1/4 left-1/4 right-1/4 bg-gradient-to-br from-blue-50/60 via-blue-100/30 to-blue-50/40 rounded-full blur-3xl"></div>
-      <div className="absolute top-20 right-20 w-96 h-96 bg-blue-300/20 rounded-full blur-2xl"></div>
-      <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-200/25 rounded-full blur-2xl"></div>
+  // ------------------------------------------------------------
+  // EMPTY
+  // ------------------------------------------------------------
+  if (requests?.length === 0 && !isLoading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#FFE4D1] to-[#c26328] px-6">
+        <h1 className="text-4xl md:text-5xl font-bold text-[#010D3E] mb-4">
+          No Requests Yet
+        </h1>
+        <p className="text-lg text-[#000000]/70 mb-8 text-center max-w-xl">
+          You're all caught up! Check back later or discover new developers.
+        </p>
 
-      <div className="relative z-10 container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-poppins font-bold text-gray-900 mb-6 leading-tight tracking-tight">
-            Connection <span className="text-blue-600">Requests</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-xl text-gray-700 leading-relaxed font-medium">
-            Review and manage your incoming connection requests from fellow
-            developers.
-          </p>
-        </div>
-
-        <div className="max-w-5xl mx-auto space-y-6">
-          {requests.map((request) => {
-            const { _id, firstName, lastName, photoURL, age, gender, about } =
-              request.fromUserId;
-
-            return (
-              <div
-                key={_id}
-                className="bg-white rounded-xl shadow-xl border border-gray-200 p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:border-blue-300"
-              >
-                <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-                  <div className="flex-shrink-0">
-                    <img
-                      alt="photo"
-                      className="w-20 h-20 rounded-full object-cover border-3 border-white shadow-lg"
-                      src={photoURL}
-                    />
-                  </div>
-
-                  <div className="flex-grow text-center md:text-left">
-                    <Link to={`/profile/${_id}`} className="inline-block">
-                      <h2 className="font-poppins font-bold text-2xl text-gray-900 hover:text-blue-600 transition-colors duration-200 cursor-pointer mb-2">
-                        {firstName + " " + lastName}
-                      </h2>
-                    </Link>
-                    {age && gender && (
-                      <p className="text-blue-600 font-medium mb-3">
-                        {age + ", " + gender}
-                      </p>
-                    )}
-                    {about && (
-                      <p className="text-gray-700 leading-relaxed mb-4 line-clamp-3">
-                        {about}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-                    <button
-                      className="bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-700 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400 min-w-[100px] hover:shadow-xl"
-                      onClick={() => reviewRequest("rejected", request._id)}
-                    >
-                      Reject
-                    </button>
-                    <button
-                      className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-xl shadow-blue-500/25 hover:bg-blue-700 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 min-w-[100px] hover:shadow-2xl hover:shadow-blue-500/30"
-                      onClick={() => reviewRequest("accepted", request._id)}
-                    >
-                      Accept
-                    </button>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <Link
+          to="/feed"
+          className="
+            btn btn-primary 
+            bg-gradient-cta 
+            shadow-orange-lg 
+            btn-pulse-on-hover
+            text-base font-semibold
+            px-7 py-3
+            rounded-xl
+          "
+        >
+          Discover Developers
+        </Link>
       </div>
+    );
+  }
+
+  // ------------------------------------------------------------
+  // MAIN VERTICAL CARDS
+  // ------------------------------------------------------------
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-[#FFE4D1] to-[#c26328] px-6 pb-20 pt-14">
+      
+      <div className="section-heading mb-14">
+
+        <h2 className="section-title mt-5 text-4xl md:text-5xl lg:text-6xl font-bold text-center text-[#010D3E] max-w-4xl mx-auto leading-tight md:whitespace-nowrap">
+          Your{" "}
+          <span className="bg-gradient-to-r from-[#ff734d] to-[#d64000] text-transparent bg-clip-text">
+            Connection Requests
+          </span>
+        </h2>
+
+        <p className="section-description mt-4 text-lg text-center text-[#000000] max-w-3xl mx-auto leading-relaxed">
+          Review incoming invites and grow your professional developer network with meaningful collaborations.
+        </p>
+      </div>
+
+      {/* Cards Grid */}
+      <div
+        className="
+          max-w-5xl mx-auto 
+          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
+          gap-6 md:gap-8
+        "
+      >
+        {requests?.map((req) => {
+          const u = req.fromUserId;
+
+          return (
+            <div
+              key={req._id}
+              className="
+                bg-white backdrop-blur-xl border border-white/40 
+                rounded-2xl shadow-lg shadow-orange-200/40 
+                hover:shadow-orange-300 hover:border-[#ff734d]/60
+                transition-all duration-300 p-4 flex flex-col items-center text-center
+              "
+            >
+              <div className="relative mb-5">
+                <div className="absolute inset-0 w-28 h-28 bg-[#ff734d]/20 blur-2xl rounded-full"></div>
+
+                <img
+                  src={u.photoURL}
+                  alt="profile"
+                  className="relative w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
+                />
+              </div>
+
+              <Link to={`/profile/${u._id}`}>
+                <h2 className="text-2xl font-semibold text-[#010D3E] hover:text-[#d64000] transition-colors">
+                  {u.firstName} {u.lastName}
+                </h2>
+              </Link>
+
+              {(u.age || u.gender) && (
+                <p className="text-sm text-[#000000]/60 mt-1">
+                  {u.age && u.gender ? `${u.age}, ${u.gender}` : u.age || u.gender}
+                </p>
+              )}
+
+              <p className="text-sm text-[#000000]/70 leading-relaxed mt-3 line-clamp-3 max-w-xs">
+                {u.about}
+              </p>
+
+              <div className="mt-6 w-full flex flex-col gap-3">
+                <button
+                  onClick={() => reviewRequest("accepted", req._id)}
+                  className="w-full cursor-pointer bg-gradient-to-r from-[#ff734d] to-[#d64000] text-white py-3 rounded-lg font-semibold shadow-orange-lg hover:opacity-90 transition-all"
+                >
+                  ✓ Accept Request
+                </button>
+
+                <button
+                  onClick={() => reviewRequest("rejected", req._id)}
+                  className="w-full bg-white/70 cursor-pointer border border-[#000000]/20 text-[#000000] py-3 rounded-lg hover:bg-[#000000]/10 transition-all"
+                >
+                  ✕ Reject
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
     </div>
   );
 };
