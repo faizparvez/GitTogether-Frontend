@@ -1,22 +1,177 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { Code2, Users, MessageSquare, Rocket, Sparkles } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-/**
- * useInView is a custom React hook that detects when an element is visible in the viewport.
- * This is a clean, reusable way to trigger scroll-based animations.
- * @param {object} options - Configuration for the Intersection Observer API.
- * @returns {[React.RefObject, boolean]} - A ref to attach to the element and a boolean indicating if it's in view.
- */
-const useInView = (options) => {
+export function Workflow() {
+  const containerRef = useRef(null);
+  const [activeStep, setActiveStep] = useState(0);
+  const navigate = useNavigate(); 
+  const [scrollProgress, setScrollProgress] = useState(0);
+    // ⭐ UPDATED TIMELINE (Step 3 removed and re-numbered)
+  const timelineSteps = [
+    {
+      icon: <Code2 className="w-6 h-6" />,
+      title: "Build Your Developer Identity",
+      description:
+        "Create a compelling profile highlighting your tech expertise, favorite languages, frameworks, and side projects. Show the community what makes you unique as a developer.",
+      color: "#ff734d",
+      badge: "Step 1",
+    },
+    {
+      icon: <Users className="w-6 h-6" />,
+      title: "Explore the Developer Community",
+      description:
+        "Dive into our network of passionate developers. Filter by technology preferences, experience levels, and collaboration interests to find your ideal coding partners.",
+      color: "#d64000",
+      badge: "Step 2",
+    },
+    {
+      icon: <MessageSquare className="w-6 h-6" />,
+      title: "Instant Developer Chat",
+      description:
+        "Once connected, jump into real-time conversations powered by WebSockets. Share code, discuss ideas, and plan your collaboration—all within our seamless chat interface.",
+      color: "#d78451",
+      badge: "Step 3",
+    },
+    {
+      icon: <Rocket className="w-6 h-6" />,
+      title: "Launch Collaborative Projects",
+      description:
+        "Turn conversations into code. Start open-source contributions, hack on weekend projects, or build the next unicorn startup with your newfound development partners.",
+      color: "#ff734d",
+      badge: "Step 4",
+    },
+    {
+      icon: <Sparkles className="w-6 h-6" />,
+      title: "Unlock Premium Features",
+      description:
+        "Upgrade with secure Razorpay payments to access advanced filters, unlimited connections, priority matching, and exclusive networking events with top developers.",
+      color: "#d64000",
+      badge: "Step 5",
+    },
+  ];
+  useEffect(() => {
+   const handleScroll = () => {
+  if (!containerRef.current) return;
+
+  const rect = containerRef.current.getBoundingClientRect();
+  const containerHeight = rect.height;
+  const scrollTop = -rect.top;
+  const progress = Math.max(0, Math.min(1, scrollTop / containerHeight));
+
+  setScrollProgress(progress);
+
+  const step = Math.min(
+    Math.floor(progress * (timelineSteps.length + 1)),
+    timelineSteps.length - 1
+  );
+
+  setActiveStep(step);
+};
+
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <section
+      id="workflow"
+      ref={containerRef}
+      className="py-24 bg-gradient-to-b from-[#FFE8D6] to-[#ba6d36] overflow-hidden relative"
+    >
+
+      {/* Background decorative elements */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-[#ff734d]/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#d64000]/5 rounded-full blur-3xl"></div>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        {/* Header Section */}
+        <div className="mb-20 text-center animate-fade-in">
+
+          <div className="flex justify-center">
+            <div className="tag">
+              <span className="text-[#ff734d] text-2xl mr-1">🚀</span>
+              How It Works
+            </div>
+          </div>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight m-6 text-center text-[#010D3E]">
+            Your Developer{" "}
+            <span className="bg-gradient-to-r from-[#ff734d] to-[#d64000] text-transparent bg-clip-text">
+              Connection Path
+            </span>
+          </h2>
+
+          <p className="text-lg md:text-xl text-[#0000000] max-w-3xl mx-auto leading-relaxed">
+            From profile creation to successful collaboration—discover how GitTogether revolutionizes developer networking with a streamlined, intuitive process.
+          </p>
+        </div>
+
+        {/* Timeline Container */}
+        <div className="relative max-w-5xl mx-auto">
+
+          {/* Vertical Timeline Line */}
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-[#ff734d]/20 to-transparent md:-ml-px"></div>
+          
+          {/* Animated Progress Line */}
+          <div 
+            className="absolute left-6 md:left-1/2 top-0 w-0.5 bg-gradient-to-b from-[#ff734d] via-[#d64000] to-[#c26328] md:-ml-px transition-all duration-500 ease-out"
+            style={{
+              height: `${(activeStep / (timelineSteps.length - 1)) * 100}%`
+            }}
+          >
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-4 h-4 rounded-full bg-[#ff734d] shadow-[0_0_20px_rgba(255,115,77,0.6)] animate-pulse"></div>
+          </div>
+          
+          {/* Timeline Steps */}
+          <div className="relative space-y-16 md:space-y-20">
+            {timelineSteps.map((step, index) => (
+              <TimelineCard 
+                key={index} 
+                step={step} 
+                index={index} 
+                isActive={index <= activeStep}
+                isEven={index % 2 === 0}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-24 text-center animate-fade-in">
+          <button 
+            onClick={() => navigate("/login")} 
+            className="btn btn-primary btn-pulse-on-hover inline-flex items-center gap-3 px-10 py-5 text-0.5xl shadow-orange-lg"
+          >
+            Start Your Journey
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </button>
+          <p className="mt-4 text-sm text-[#e5e5e5]/70">No credit card required • Free to start</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TimelineCard({ step, index, isActive, isEven }) {
   const ref = useRef(null);
   const [isInView, setIsInView] = useState(false);
-
+  
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsInView(true);
-        observer.unobserve(entry.target);
-      }
-    }, options);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
 
     if (ref.current) {
       observer.observe(ref.current);
@@ -24,120 +179,79 @@ const useInView = (options) => {
 
     return () => {
       if (ref.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         observer.unobserve(ref.current);
       }
     };
-  }, [ref, options]);
+  }, []);
 
-  return [ref, isInView];
-};
-
-/**
- * The Workflow component explains the three-step process of using the GitTogether platform.
- * Styled to match the Hero component's gradient background theme.
- */
-const Workflow = () => {
-  const [sectionRef, isSectionInView] = useInView({ threshold: 0.2 });
-
-  const workflowSteps = [
-    {
-      step: "1",
-      title: "Push Your Profile",
-      description:
-        "Build a developer card that showcases your skills, languages, and what you're passionate about building next.",
-      colors: {
-        bg: "bg-blue-50",
-        border: "border-blue-200",
-        text: "text-blue-600",
-      },
-    },
-    {
-      step: "2",
-      title: "Discover Developers",
-      description:
-        "Explore our curated network of talented developers. Filter by tech stack and interests to find the perfect collaborator.",
-      colors: {
-        bg: "bg-gray-50",
-        border: "border-gray-200",
-        text: "text-gray-600",
-      },
-    },
-    {
-      step: "3",
-      title: "Commit to Connecting",
-      description:
-        "Send a connection request, start a conversation, and begin collaborating on the next great connection.",
-      colors: {
-        bg: "bg-blue-50",
-        border: "border-blue-200",
-        text: "text-blue-600",
-      },
-    },
-  ];
+  const animationDelay = index * 100;
+  const shouldAnimate = isInView && isActive;
 
   return (
-    <section className="relative min-h-screen flex items-center px-6 md:px-8 lg:px-12 py-8 bg-gray-50">
-      {/* Simple, clean background with subtle accents */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-blue-100/40 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 left-20 w-80 h-80 bg-blue-50/60 rounded-full blur-3xl"></div>
-
-      <div
-        ref={sectionRef}
-        className={`container mx-auto max-w-6xl relative z-10 ${
-          isSectionInView ? "section-in-view" : ""
-        }`}
-      >
-        {/* Header styled to match Hero typography */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-poppins font-bold text-gray-900 mb-6 leading-tight tracking-tight">
-            Your Collaboration <span className="text-blue-600">Workflow</span>
-          </h2>
-          <p className="max-w-3xl mx-auto text-xl lg:text-2xl text-gray-700 leading-relaxed font-medium">
-            A simple, developer-first path to your next great connection.
-          </p>
-        </div>
-
-        {/* Enhanced workflow cards styled like Hero cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {workflowSteps.map((item, index) => (
-            <div key={item.step} className="animated-section-card group">
-              {/* Cards styled to match Hero's developer cards */}
-              <div className="bg-white p-8 rounded-xl shadow-xl border border-gray-200 text-center hover:shadow-2xl transition-all duration-300 group-hover:-translate-y-2">
-                {/* Step number styled like Hero elements */}
-                <div className="flex justify-center mb-6">
-                  <div className="w-20 h-20 bg-blue-600 rounded-xl flex items-center justify-center shadow-xl shadow-blue-500/25 hover:scale-105 transition-all duration-300">
-                    <span className="text-3xl text-white font-bold">
-                      {item.step}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content with Hero-matching typography */}
-                <div className="text-center">
-                  <h3 className="text-2xl font-poppins font-bold text-gray-900 mb-4 tracking-tight">
-                    {item.title}
-                  </h3>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-
-              {/* Connection arrow styled to match theme */}
-              {index < workflowSteps.length - 1 && (
-                <div className="hidden md:flex justify-center mt-6 mb-6">
-                  <div className="bg-white rounded-xl px-4 py-2 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
-                    <div className="text-blue-600 text-2xl font-bold">→</div>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
+    <div 
+      ref={ref}
+      className={`relative flex items-start ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+    >
+      {/* Node */}
+      <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 z-20">
+        <div 
+          className={`relative flex items-center justify-center w-12 h-12 rounded-full transition-all duration-500 border-4 border-[#0b0908] ${
+            isActive 
+              ? 'bg-gradient-to-br from-[#ff734d] to-[#d64000] scale-110 shadow-[0_0_30px_rgba(255,115,77,0.5)]' 
+              : 'bg-[#15100f] scale-100'
+          }`}
+          style={{
+            transitionDelay: `${animationDelay}ms`
+          }}
+        >
+          <div className={`transition-all duration-300 ${isActive ? 'text-white' : 'text-[#666]'}`}>
+            {step.icon}
+          </div>
         </div>
       </div>
-    </section>
+
+      {/* Card */}
+      <div 
+        className={`ml-24 md:ml-0 ${isEven ? 'md:w-[calc(50%-3rem)] md:pr-12' : 'md:w-[calc(50%-3rem)] md:pl-12'} transition-all duration-700 ${
+          shouldAnimate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+        style={{ transitionDelay: `${animationDelay}ms` }}
+      >
+        <div 
+          className={`relative bg-[#15100f] rounded-2xl p-8 border transition-all duration-500 group hover:-translate-y-2 ${
+            isActive 
+              ? 'border-[#ff734d]/30 shadow-orange-lg' 
+              : 'border-[#ff734d]/10'
+          }`}
+        >
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#ff734d]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0b0908] border border-[#ff734d]/20 mb-4">
+              <span className="text-xs font-semibold text-[#ff734d]">{step.badge}</span>
+            </div>
+            
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-gradient-hero transition-all duration-300">
+              {step.title}
+            </h3>
+
+            <p className="text-base md:text-lg text-[#e5e5e5] leading-relaxed">
+              {step.description}
+            </p>
+
+            <div 
+              className={`absolute -bottom-2 -right-2 w-16 h-16 rounded-full blur-2xl transition-opacity duration-500 ${
+                isActive ? 'opacity-30' : 'opacity-0'
+              }`}
+              style={{ background: step.color }}
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div className="hidden md:block md:w-[calc(50%-3rem)]"></div>
+    </div>
   );
-};
+}
 
 export default Workflow;
