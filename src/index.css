@@ -2,9 +2,7 @@
 @config "../tailwind.config.js";
 @import "tailwindcss";
 
-/* ============================================
-   GITTOGETHER THEME CONFIGURATION (LIGHT MODE ONLY)
-   ============================================ */
+/* GITTOGETHER THEME CONFIGURATION (LIGHT MODE ONLY) */
 
 @theme {
   /* --- Primary Orange Gradient Brand Colors --- */
@@ -57,9 +55,7 @@
   --radius-xl: 1rem;
 }
 
-/* ============================================
-   BASE STYLES
-   ============================================ */
+/* BASE STYLES */
 
 @layer base {
   /* Root-level CSS Variables for Direct Access */
@@ -84,9 +80,7 @@
   }
 }
 
-/* ============================================
-   PROFESSIONAL ANIMATIONS
-   ============================================ */
+/* PROFESSIONAL ANIMATIONS */
 
 /* 1. Floating Animation - For hero developer cards */
 @keyframes subtle-float {
@@ -223,9 +217,7 @@
   animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ============================================
-   UTILITY CLASSES
-   ============================================ */
+/* UTILITY CLASSES */
 
 /* Gradient Backgrounds */
 .bg-gradient-hero {
@@ -279,9 +271,7 @@
               0 4px 6px -2px rgba(255, 115, 77, 0.05);
 }
 
-/* ============================================
-   BUTTON STYLES (SaaS-Style)
-   ============================================ */
+/* BUTTON STYLES (SaaS-Style) */
 
 /* Primary Button with Gradient */
 .btn {
@@ -346,9 +336,7 @@
   color: #010D3E;
 }
 
-/* ============================================
-   ACCESSIBILITY: REDUCE MOTION
-   ============================================ */
+/* ACCESSIBILITY: REDUCE MOTION */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -359,10 +347,6 @@
     transition-duration: 0.01ms !important;
   }
 }
-
-/* ============================================
-   SCROLLBAR STYLING (OPTIONAL)
-   ============================================ */
 
 /* Custom Scrollbar for Webkit Browsers */
 ::-webkit-scrollbar {

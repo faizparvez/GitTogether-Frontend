@@ -26,7 +26,7 @@ const AppLayout = () => {
         navigate("/");
       }
       // console.log("api called but error found");
-      console.error(err);
+      // console.error(err);
     }
   };
 
