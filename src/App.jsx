@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import Login from "./components/Login";
-import Profile from "./components/Profile";
 import { Provider } from "react-redux";
 import appStore from "./redux/appStore";
 import Feed from "./components/Feed";
@@ -9,13 +8,9 @@ import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import Chat from "./components/Chat";
 import Home from "./components/Home";
-import PrivacyPolicy from "./components/PrivacyPolicy";
-import ShippingPolicy from "./components/ShippingPolicy";
-import TermsConditions from "./components/TermsConditions";
-import CancellationRefunds from "./components/CancellationRefunds";
-import ContactUs from "./components/ContactUs";
-import Billing from "./components/Billing";
-import AboutUs from "./components/AboutUs";
+import Pricing from "./components/Pricing";
+import ProfileEdit from "./components/ProfileEdit";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
@@ -28,17 +23,12 @@ function App() {
               {/* route matching our application's root */}
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/privacy" element={<PrivacyPolicy />} />
-              <Route path="/shippingpolicy" element={<ShippingPolicy />} />
-              <Route path="/termsconditions" element={<TermsConditions />} />
-              <Route path="/cancellationrefunds" element={<CancellationRefunds />} />
-              <Route path="/contact" element={<ContactUs />} />
-              <Route path="/about" element={<AboutUs />} />
               <Route path="/feed" element={<Feed />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/edit" element={<ProfileEdit />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
-              <Route path="/billing" element={<Billing />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/profile/:userId" element={<UserProfile />} />
               <Route path="/chat/:targetUserId" element={<Chat />} />
             </Route>
           </Routes>

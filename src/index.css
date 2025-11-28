@@ -1,59 +1,390 @@
-/* Using the correct import statement for your project setup */
+/* Tailwind CSS v4 Import */
+@config "../tailwind.config.js";
 @import "tailwindcss";
 
-/* --- All Custom Animations and Styles --- */
+/* ============================================
+   GITTOGETHER THEME CONFIGURATION (LIGHT MODE ONLY)
+   ============================================ */
 
-/* Animation for the floating developer cards in the Hero section */
+@theme {
+  /* --- Primary Orange Gradient Brand Colors --- */
+  --color-primary-orange: #ff734d;
+  --color-deep-orange: #d64000;
+  --color-warm-brown: #c26328;
+  --color-lighter-brown: #d78451;
+  --color-dark-brown: #804718;
+  
+  /* Shorthand for main brand color */
+  --color-primary: #ff734d;
+  --color-primary-foreground: #ffffff;
+  
+  /* --- Light Mode Backgrounds --- */
+  --color-bg-hero: #EAEEFE;
+  --color-bg-white: #FFFFFF;
+  --color-bg-card: #F1F1F1;
+  --color-bg-shadow: #EAEAEA;
+  
+  /* --- Light Mode Text --- */
+  --color-text-primary: #010D3E;
+  --color-text-secondary: #000000;
+  
+  /* --- Light Mode Borders --- */
+  --color-border-light: #F1F1F1;
+  --color-border-orange: rgba(255, 115, 77, 0.2);
+  
+  /* --- Semantic Color Mappings --- */
+  --color-background: #EAEEFE;
+  --color-card: #F1F1F1;
+  --color-muted: #EAEAEA;
+  --color-border: rgba(241, 241, 241, 1);
+  --color-foreground: #010D3E;
+  --color-muted-foreground: #000000;
+  --color-card-foreground: #010D3E;
+  
+  /* --- Secondary & Accent Colors --- */
+  --color-secondary: #c26328;
+  --color-secondary-foreground: #ffffff;
+  --color-accent: #d78451;
+  --color-accent-foreground: #ffffff;
+  
+  /* --- Input & Ring Colors --- */
+  --color-input: #F1F1F1;
+  --color-ring: #ff734d;
+  
+  /* --- Border Radius --- */
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+@layer base {
+  /* Root-level CSS Variables for Direct Access */
+  :root {
+    /* Hero Section Gradients */
+    --gradient-hero-bg: linear-gradient(135deg, #EAEEFE 0%, #c26328 100%);
+    --gradient-hero-text: linear-gradient(135deg, #ff734d 0%, #d64000 100%);
+    
+    /* Features Section Gradients */
+    --gradient-features-bg: linear-gradient(180deg, #d78451 0%, #000000 100%);
+    --gradient-features-heading: linear-gradient(180deg, #804718 0%, #000000 100%);
+    
+    /* Orange Gradient for CTAs */
+    --gradient-cta: linear-gradient(135deg, #ff734d 0%, #d64000 100%);
+  }
+  
+  /* Base Styling */
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+/* ============================================
+   PROFESSIONAL ANIMATIONS
+   ============================================ */
+
+/* 1. Floating Animation - For hero developer cards */
 @keyframes subtle-float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 .animate-subtle-float {
-  animation: subtle-float 8s ease-in-out infinite;
+  animation: subtle-float 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   will-change: transform;
 }
 
-
-/* NEW, CORRECTED ANIMATION for the headline word-swapping */
+/* 2. Word Slide Animation - For headline word-swapping */
 @keyframes wordSlide {
-  0% { transform: translateY(30px); opacity: 0; }
-  10% { transform: translateY(0); opacity: 1; }
-  90% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-30px); opacity: 0; }
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  15% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  85% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
 }
 
 .word-slide-animation {
-    /* The duration should be slightly less than the JS interval to prevent visual glitches */
-    animation: wordSlide 2.5s ease-in-out infinite;
+  animation: wordSlide 2.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
+/* 3. Gradient Text Animation */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
 
-/* Styles for Scroll-Triggered Animations (Workflow & Testimonials Sections) */
+.animate-gradient-text {
+  background: var(--gradient-hero-text);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* 4. Scroll-Triggered Card Animations - For Workflow & Testimonials */
 .animated-section-card {
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: translateY(24px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .section-in-view .animated-section-card {
   opacity: 1;
   transform: translateY(0);
 }
-/* Stagger the animation for a more dynamic effect */
+
+/* Staggered animation delays */
+.section-in-view .animated-section-card:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
 .section-in-view .animated-section-card:nth-child(2) {
   transition-delay: 0.2s;
 }
+
 .section-in-view .animated-section-card:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.section-in-view .animated-section-card:nth-child(4) {
   transition-delay: 0.4s;
 }
 
+.section-in-view .animated-section-card:nth-child(5) {
+  transition-delay: 0.5s;
+}
 
-/* Styles for the Sticky Header on Scroll */
+.section-in-view .animated-section-card:nth-child(6) {
+  transition-delay: 0.6s;
+}
+
+/* 5. Button Hover Effects */
+@keyframes button-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 115, 77, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 115, 77, 0);
+  }
+}
+
+.btn-pulse-on-hover:hover {
+  animation: button-pulse 1.5s infinite;
+}
+
+/* 6. Sticky Header - Smooth backdrop on scroll */
 .header-scrolled {
-  background-color: rgba(249, 250, 251, 0.5);
-  backdrop-filter: blur(16px);
-  border-bottom-width: 1px;
-  border-color: #E5E7EB; /* theme.colors.gray.200 */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border-bottom: 1px solid rgba(241, 241, 241, 1);
+  box-shadow: 0 1px 3px 0 rgba(255, 115, 77, 0.1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 7. Fade In Animation for Page Load */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Gradient Backgrounds */
+.bg-gradient-hero {
+  background: var(--gradient-hero-bg);
+}
+
+.bg-gradient-features {
+  background: var(--gradient-features-bg);
+}
+
+.bg-gradient-cta {
+  background: var(--gradient-cta);
+}
+
+/* Gradient Text */
+.text-gradient-hero {
+  background: var(--gradient-hero-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-features {
+  background: var(--gradient-features-heading);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Orange Border Utilities */
+.border-orange-light {
+  border-color: rgba(255, 115, 77, 0.2);
+}
+
+/* Glassmorphism Effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid rgba(241, 241, 241, 1);
+}
+
+/* Shadow with Orange Tint */
+.shadow-orange {
+  box-shadow: 0 4px 6px -1px rgba(255, 115, 77, 0.1),
+              0 2px 4px -1px rgba(255, 115, 77, 0.06);
+}
+
+.shadow-orange-lg {
+  box-shadow: 0 10px 15px -3px rgba(255, 115, 77, 0.1),
+              0 4px 6px -2px rgba(255, 115, 77, 0.05);
+}
+
+/* ============================================
+   BUTTON STYLES (SaaS-Style)
+   ============================================ */
+
+/* Primary Button with Gradient */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ff734d 0%, #d64000 100%);
+  color: white;
+  padding: 0.75rem 1.75rem;
+  height: 2.75rem;
+  box-shadow: 0 4px 6px -1px rgba(255, 115, 77, 0.1),
+              0 2px 4px -1px rgba(255, 115, 77, 0.06);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(255, 115, 77, 0.2),
+              0 4px 6px -2px rgba(255, 115, 77, 0.1);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Text Button with Arrow */
+.btn-text {
+  background: transparent;
+  color: #010D3E;
+  padding: 0.75rem 1.25rem;
+  height: 2.75rem;
+  font-weight: 600;
+}
+
+.btn-text:hover {
+  color: #ff734d;
+}
+
+/* Tag Badge */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(255, 115, 77, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 3px 0 rgba(255, 115, 77, 0.1);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #010D3E;
+}
+
+/* ============================================
+   ACCESSIBILITY: REDUCE MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   SCROLLBAR STYLING (OPTIONAL)
+   ============================================ */
+
+/* Custom Scrollbar for Webkit Browsers */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-orange);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-deep-orange);
+}
+
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-orange) #FFFFFF;
 }
