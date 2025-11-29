@@ -94,7 +94,7 @@ export const INTERESTS_OPTIONS = [
   "Cloud Computing",
   "DevOps",
   "System Design",
-  "Open Source Contributions",
+  "Open Source",
   "UI/UX Design",
   "Web Development",
   "Mobile App Development",

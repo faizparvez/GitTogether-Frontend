@@ -57,7 +57,6 @@ const SwipeableCard = ({
 
       {/* MAIN CARD */}
       <div className="w-full rounded-2xl border border-[rgba(255,115,77,0.2)] bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group overflow-hidden">
-        
         {/* Top Banner with Gradient */}
         <div className="relative h-28 bg-gradient-to-br from-[#EAEEFE] to-[#ff734d] overflow-hidden">
           {/* Decorative Pattern Overlay */}
@@ -68,40 +67,47 @@ const SwipeableCard = ({
 
           {/* Profile Picture */}
           <div className="absolute left-1/2 top-2  -translate-x-1/2">
-              <div className="relative">
-                <img
-                  src={user.photoURL}
-                  alt={`${user.firstName} ${user.lastName}`}
-                  className="w-24 h-24 rounded-full object-cover border-1 border-white shadow-sm transition-transform duration-300 group-hover:scale-105"
-                  onError={(e) => {
-                    e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                      user.firstName + " " + user.lastName
-                    )}&background=ff734d&color=ffffff&size=200`;
-                  }}
-                />
+            <div className="relative">
+              <img
+                src={user.photoURL}
+                alt={`${user.firstName} ${user.lastName}`}
+                className="w-24 h-24 rounded-full object-cover border-1 border-white shadow-sm transition-transform duration-300 group-hover:scale-105"
+                onError={(e) => {
+                  e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                    user.firstName + " " + user.lastName
+                  )}&background=ff734d&color=ffffff&size=200`;
+                }}
+              />
 
-                {/* Premium Badge */}
-                {user.isPremium && (
-                  <div className="absolute -top-1 -right-1 w-7 h-7 bg-gradient-to-r from-[#ff734d] to-[#d64000] rounded-full flex items-center justify-center border-2 border-white shadow-lg">
-                    <span className="text-white text-xs font-bold">⭐</span>
-                  </div>
-                )}
-              </div>
+              {/* Premium Badge */}
+              {user.isPremium && (
+                <div className="absolute -top-1 -right-1 w-7 h-7 bg-gradient-to-r from-[#ff734d] to-[#d64000] rounded-full flex items-center justify-center border-2 border-white shadow-lg">
+                  <span className="text-white text-xs font-bold">⭐</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         {/* NAME + TITLE */}
         <div className="pt-3 pb-3 px-6 text-center border-b border-[rgba(255,115,77,0.1)]">
-         
-            <h2 className="text-2xl font-bold text-[#010D3E] leading-tight">
-              {user.firstName} {user.lastName}
-            </h2>
-          
+          <h2 className="text-2xl font-bold text-[#010D3E] leading-tight">
+            {user.firstName} {user.lastName}
+          </h2>
+
           {/* Location */}
           {user.location && (
             <p className="text-sm text-[#000000] opacity-70 mt-2 flex items-center justify-center gap-1">
-              <svg className="w-4 h-4 text-[#ff734d]" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+              <svg
+                className="w-4 h-4 text-[#ff734d]"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                  clipRule="evenodd"
+                />
               </svg>
               {user.location}
             </p>
@@ -122,20 +128,32 @@ const SwipeableCard = ({
           <div className="flex justify-center items-center space-x-4 text-sm">
             {user.age && (
               <div className="flex items-center gap-1.5 text-[#010D3E] font-medium">
-                <svg className="w-4 h-4 text-[#ff734d]" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                <svg
+                  className="w-4 h-4 text-[#ff734d]"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <span>{user.age} yrs</span>
               </div>
             )}
-            
+
             {user.age && user.gender && (
               <span className="text-[#000000] opacity-30">•</span>
             )}
-            
+
             {user.gender && (
               <div className="flex items-center gap-1.5 text-[#010D3E] font-medium">
-                <svg className="w-4 h-4 text-[#ff734d]" fill="currentColor" viewBox="0 0 20 20">
+                <svg
+                  className="w-4 h-4 text-[#ff734d]"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
                 </svg>
                 <span>{user.gender}</span>

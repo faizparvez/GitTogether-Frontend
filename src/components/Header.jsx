@@ -33,7 +33,10 @@ const Header = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo and Brand Name */}
-            <Link to="/" className="flex cursor-pointer items-center gap-3 group">
+            <Link
+              to="/"
+              className="flex cursor-pointer items-center gap-3 group"
+            >
               <svg
                 className="h-10 w-10 rounded-lg transition-transform duration-300 group-hover:scale-110"
                 viewBox="0 0 100 100"
@@ -41,7 +44,7 @@ const Header = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 {/* Git-inspired connection icon with gradient */}
-                <rect width="100" height="100" rx="12" fill="#ff734d"/>
+                <rect width="100" height="100" rx="12" fill="#ff734d" />
                 <circle
                   cx="30"
                   cy="50"
@@ -74,60 +77,65 @@ const Header = () => {
             </Link>
 
             {/* Desktop Navigation - Centered (Always Visible) */}
-              {!user && (
-            <nav className="absolute left-1/2 hidden -translate-x-1/2 transform items-center gap-8 md:flex">
+            {!user && (
+              <nav className="absolute left-1/2 hidden -translate-x-1/2 transform items-center gap-8 md:flex">
                 <a
-                href="#product"
-                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
-              >
-                Product
-              </a>
+                  href="#product"
+                  className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
+                >
+                  Product
+                </a>
                 <a
-                href="#workflow"
-                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
-              >
-                Workflow
-              </a>
-              <a
-                href="#testimonials"
-                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
-              >
-                Testimonials
-              </a>
-            </nav>)}
-              {user && (
-            <nav className="absolute left-1/2 hidden -translate-x-1/2 transform items-center gap-8 md:flex">
+                  href="#workflow"
+                  className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
+                >
+                  Workflow
+                </a>
+                <a
+                  href="#testimonials"
+                  className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
+                >
+                  Testimonials
+                </a>
+              </nav>
+            )}
+            {user && (
+              <nav className="absolute left-1/2 hidden -translate-x-1/2 transform items-center gap-8 md:flex">
                 <Link
-                to="/feed"
-                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
-              >
-                Browse
-              </Link>
-              <Link
-                to="/connections"
-                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
-              >
-                Connections
-              </Link>
-              <Link
-                to="/requests"
-                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
-              >
-                Requests
-              </Link>
-              <Link
-                to="/pricing"
-                className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
-              >
-                Pricing
-              </Link>
-            </nav>)}
+                  to="/feed"
+                  className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
+                >
+                  Browse
+                </Link>
+                <Link
+                  to="/connections"
+                  className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
+                >
+                  Connections
+                </Link>
+                <Link
+                  to="/requests"
+                  className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
+                >
+                  Requests
+                </Link>
+                <Link
+                  to="/pricing"
+                  className="font-medium text-black transition-colors duration-300 hover:text-[#ff734d]"
+                >
+                  Pricing
+                </Link>
+              </nav>
+            )}
 
             {/* Desktop CTA Button - Right Aligned */}
             <div className="hidden md:flex">
               {user ? (
                 <div className="flex items-center gap-3">
-                  <Link to={`/profile/${user._id}`} className="group flex items-center gap-2">
+                  <Link
+                    to={`/profile/${user._id}`}
+                    className="group flex items-center gap-2"
+                  >
                     <img
                       src={user.photoURL}
                       alt={user.firstName}
@@ -257,9 +265,7 @@ const Header = () => {
                       }}
                       className="btn btn-primary group relative overflow-hidden"
                     >
-                      <span className="inline-flex items-center">
-                        Logout
-                      </span>
+                      <span className="inline-flex items-center">Logout</span>
                     </button>
                   </>
                 ) : (

@@ -90,11 +90,14 @@ const Feed = () => {
             <div className="w-12 h-12 bg-[#ff734d22] rounded-xl flex items-center justify-center">
               <Users className="w-7 h-7 text-[#d64000]" />
             </div>
-            <h3 className="text-2xl font-bold text-[#010D3E]">All Caught Up!</h3>
+            <h3 className="text-2xl font-bold text-[#010D3E]">
+              All Caught Up!
+            </h3>
           </div>
 
           <div className="px-6 pb-4 text-[#00000099]">
-            You’ve viewed all available developers. Check back later for more recommendations!
+            You’ve viewed all available developers. Check back later for more
+            recommendations!
           </div>
 
           <div className="px-6 pb-6">
@@ -115,19 +118,16 @@ const Feed = () => {
   // ------------------------------------------------------------------
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#FFE4D1] to-[#c26328] overflow-x-hidden">
-
       <div className="relative flex items-center justify-center min-h-screen px-4 py-20">
-
         {/* LEFT BUTTON */}
-       <div className="flex-1 flex justify-center mt-10">
-  <div className="group flex flex-col items-center space-y-4">
-
-    {/* ICON is the REAL button */}
-    <button
-      type="button"
-      onClick={() => handleButtonAction("ignored")}
-      disabled={feed.length === 0}
-      className="
+        <div className="flex-1 flex justify-center mt-10">
+          <div className="group flex flex-col items-center space-y-4">
+            {/* ICON is the REAL button */}
+            <button
+              type="button"
+              onClick={() => handleButtonAction("ignored")}
+              disabled={feed.length === 0}
+              className="
         w-16 h-16 rounded-2xl
         bg-white/80 backdrop-blur-sm
         border border-[rgba(255,115,77,0.2)]
@@ -137,19 +137,20 @@ const Feed = () => {
         cursor-pointer
         disabled:opacity-50 disabled:cursor-not-allowed
       "
-    >
-      <ChevronLeft className="w-7 h-7 text-[#c26328]" strokeWidth={2.5} />
-    </button>
+            >
+              <ChevronLeft
+                className="w-7 h-7 text-[#c26328]"
+                strokeWidth={2.5}
+              />
+            </button>
 
-    {/* TEXT — not clickable */}
-    <div className="text-center opacity-70 group-hover:opacity-100 cursor-default">
-      <p className="text-[#010D3E] font-bold text-lg">Pass</p>
-      <p className="text-[#000000] opacity-60 text-sm">Swipe left</p>
-    </div>
-
-  </div>
-</div>
-
+            {/* TEXT — not clickable */}
+            <div className="text-center opacity-70 group-hover:opacity-100 cursor-default">
+              <p className="text-[#010D3E] font-bold text-lg">Pass</p>
+              <p className="text-[#000000] opacity-60 text-sm">Swipe left</p>
+            </div>
+          </div>
+        </div>
 
         {/* CARD STACK */}
         <div className="relative flex items-center justify-center flex-shrink-0">
@@ -169,13 +170,12 @@ const Feed = () => {
 
         {/* RIGHT BUTTON */}
         <div className="flex-1 flex justify-center mt-10">
-  <div className="group flex flex-col items-center space-y-4">
-
-    <button
-      type="button"
-      onClick={() => handleButtonAction("interested")}
-      disabled={feed.length === 0}
-      className="
+          <div className="group flex flex-col items-center space-y-4">
+            <button
+              type="button"
+              onClick={() => handleButtonAction("interested")}
+              disabled={feed.length === 0}
+              className="
         w-16 h-16 rounded-2xl
         bg-gradient-to-r from-[#ff734d] to-[#d64000]
         shadow-orange-lg flex items-center justify-center
@@ -184,18 +184,16 @@ const Feed = () => {
         cursor-pointer
         disabled:opacity-50 disabled:cursor-not-allowed
       "
-    >
-      <ChevronRight className="w-7 h-7 text-white" strokeWidth={2.5} />
-    </button>
+            >
+              <ChevronRight className="w-7 h-7 text-white" strokeWidth={2.5} />
+            </button>
 
-    <div className="text-center opacity-70 group-hover:opacity-100 cursor-default">
-      <p className="text-[#d64000] font-bold text-lg">Connect</p>
-      <p className="text-[#000000] opacity-60 text-sm">Swipe right</p>
-    </div>
-
-  </div>
-</div>
-
+            <div className="text-center opacity-70 group-hover:opacity-100 cursor-default">
+              <p className="text-[#d64000] font-bold text-lg">Connect</p>
+              <p className="text-[#000000] opacity-60 text-sm">Swipe right</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* FIXED COUNTERS */}
@@ -216,7 +214,6 @@ const Feed = () => {
           </p>
         </div>
       </div>
-
     </div>
   );
 };

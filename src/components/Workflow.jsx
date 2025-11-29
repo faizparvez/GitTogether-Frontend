@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 export function Workflow() {
   const containerRef = useRef(null);
   const [activeStep, setActiveStep] = useState(0);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [scrollProgress, setScrollProgress] = useState(0);
-    // ⭐ UPDATED TIMELINE (Step 3 removed and re-numbered)
+  // ⭐ UPDATED TIMELINE (Step 3 removed and re-numbered)
   const timelineSteps = [
     {
       icon: <Code2 className="w-6 h-6" />,
@@ -51,29 +51,28 @@ export function Workflow() {
     },
   ];
   useEffect(() => {
-   const handleScroll = () => {
-  if (!containerRef.current) return;
+    const handleScroll = () => {
+      if (!containerRef.current) return;
 
-  const rect = containerRef.current.getBoundingClientRect();
-  const containerHeight = rect.height;
-  const scrollTop = -rect.top;
-  const progress = Math.max(0, Math.min(1, scrollTop / containerHeight));
+      const rect = containerRef.current.getBoundingClientRect();
+      const containerHeight = rect.height;
+      const scrollTop = -rect.top;
+      const progress = Math.max(0, Math.min(1, scrollTop / containerHeight));
 
-  setScrollProgress(progress);
+      setScrollProgress(progress);
 
-  const step = Math.min(
-    Math.floor(progress * (timelineSteps.length + 1)),
-    timelineSteps.length - 1
-  );
+      const step = Math.min(
+        Math.floor(progress * (timelineSteps.length + 1)),
+        timelineSteps.length - 1
+      );
 
-  setActiveStep(step);
-};
+      setActiveStep(step);
+    };
 
-
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     handleScroll();
-    
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -82,16 +81,13 @@ export function Workflow() {
       ref={containerRef}
       className="py-24 bg-gradient-to-b from-[#FFE8D6] to-[#ba6d36] overflow-hidden relative"
     >
-
       {/* Background decorative elements */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-[#ff734d]/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#d64000]/5 rounded-full blur-3xl"></div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header Section */}
         <div className="mb-20 text-center animate-fade-in">
-
           <div className="flex justify-center">
             <div className="tag">
               <span className="text-[#ff734d] text-2xl mr-1">🚀</span>
@@ -107,33 +103,34 @@ export function Workflow() {
           </h2>
 
           <p className="text-lg md:text-xl text-[#0000000] max-w-3xl mx-auto leading-relaxed">
-            From profile creation to successful collaboration—discover how GitTogether revolutionizes developer networking with a streamlined, intuitive process.
+            From profile creation to successful collaboration—discover how
+            GitTogether revolutionizes developer networking with a streamlined,
+            intuitive process.
           </p>
         </div>
 
         {/* Timeline Container */}
         <div className="relative max-w-5xl mx-auto">
-
           {/* Vertical Timeline Line */}
           <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-[#ff734d]/20 to-transparent md:-ml-px"></div>
-          
+
           {/* Animated Progress Line */}
-          <div 
+          <div
             className="absolute left-6 md:left-1/2 top-0 w-0.5 bg-gradient-to-b from-[#ff734d] via-[#d64000] to-[#c26328] md:-ml-px transition-all duration-500 ease-out"
             style={{
-              height: `${(activeStep / (timelineSteps.length - 1)) * 100}%`
+              height: `${(activeStep / (timelineSteps.length - 1)) * 100}%`,
             }}
           >
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-4 h-4 rounded-full bg-[#ff734d] shadow-[0_0_20px_rgba(255,115,77,0.6)] animate-pulse"></div>
           </div>
-          
+
           {/* Timeline Steps */}
           <div className="relative space-y-16 md:space-y-20">
             {timelineSteps.map((step, index) => (
-              <TimelineCard 
-                key={index} 
-                step={step} 
-                index={index} 
+              <TimelineCard
+                key={index}
+                step={step}
+                index={index}
                 isActive={index <= activeStep}
                 isEven={index % 2 === 0}
               />
@@ -143,16 +140,28 @@ export function Workflow() {
 
         {/* CTA */}
         <div className="mt-24 text-center animate-fade-in">
-          <button 
-            onClick={() => navigate("/login")} 
+          <button
+            onClick={() => navigate("/login")}
             className="btn btn-primary btn-pulse-on-hover inline-flex items-center gap-3 px-10 py-5 text-0.5xl shadow-orange-lg"
           >
             Start Your Journey
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2.5}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
             </svg>
           </button>
-          <p className="mt-4 text-sm text-[#e5e5e5]/70">No credit card required • Free to start</p>
+          <p className="mt-4 text-sm text-[#e5e5e5]/70">
+            No credit card required • Free to start
+          </p>
         </div>
       </div>
     </section>
@@ -162,7 +171,7 @@ export function Workflow() {
 function TimelineCard({ step, index, isActive, isEven }) {
   const ref = useRef(null);
   const [isInView, setIsInView] = useState(false);
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -188,49 +197,63 @@ function TimelineCard({ step, index, isActive, isEven }) {
   const shouldAnimate = isInView && isActive;
 
   return (
-    <div 
+    <div
       ref={ref}
-      className={`relative flex items-start ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+      className={`relative flex items-start ${
+        isEven ? "md:flex-row" : "md:flex-row-reverse"
+      }`}
     >
       {/* Node */}
       <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 z-20">
-        <div 
+        <div
           className={`relative flex items-center justify-center w-12 h-12 rounded-full transition-all duration-500 border-4 border-[#0b0908] ${
-            isActive 
-              ? 'bg-gradient-to-br from-[#ff734d] to-[#d64000] scale-110 shadow-[0_0_30px_rgba(255,115,77,0.5)]' 
-              : 'bg-[#15100f] scale-100'
+            isActive
+              ? "bg-gradient-to-br from-[#ff734d] to-[#d64000] scale-110 shadow-[0_0_30px_rgba(255,115,77,0.5)]"
+              : "bg-[#15100f] scale-100"
           }`}
           style={{
-            transitionDelay: `${animationDelay}ms`
+            transitionDelay: `${animationDelay}ms`,
           }}
         >
-          <div className={`transition-all duration-300 ${isActive ? 'text-white' : 'text-[#666]'}`}>
+          <div
+            className={`transition-all duration-300 ${
+              isActive ? "text-white" : "text-[#666]"
+            }`}
+          >
             {step.icon}
           </div>
         </div>
       </div>
 
       {/* Card */}
-      <div 
-        className={`ml-24 md:ml-0 ${isEven ? 'md:w-[calc(50%-3rem)] md:pr-12' : 'md:w-[calc(50%-3rem)] md:pl-12'} transition-all duration-700 ${
-          shouldAnimate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      <div
+        className={`ml-24 md:ml-0 ${
+          isEven
+            ? "md:w-[calc(50%-3rem)] md:pr-12"
+            : "md:w-[calc(50%-3rem)] md:pl-12"
+        } transition-all duration-700 ${
+          shouldAnimate
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-8"
         }`}
         style={{ transitionDelay: `${animationDelay}ms` }}
       >
-        <div 
+        <div
           className={`relative bg-[#15100f] rounded-2xl p-8 border transition-all duration-500 group hover:-translate-y-2 ${
-            isActive 
-              ? 'border-[#ff734d]/30 shadow-orange-lg' 
-              : 'border-[#ff734d]/10'
+            isActive
+              ? "border-[#ff734d]/30 shadow-orange-lg"
+              : "border-[#ff734d]/10"
           }`}
         >
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#ff734d]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          
+
           <div className="relative z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0b0908] border border-[#ff734d]/20 mb-4">
-              <span className="text-xs font-semibold text-[#ff734d]">{step.badge}</span>
+              <span className="text-xs font-semibold text-[#ff734d]">
+                {step.badge}
+              </span>
             </div>
-            
+
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-gradient-hero transition-all duration-300">
               {step.title}
             </h3>
@@ -239,9 +262,9 @@ function TimelineCard({ step, index, isActive, isEven }) {
               {step.description}
             </p>
 
-            <div 
+            <div
               className={`absolute -bottom-2 -right-2 w-16 h-16 rounded-full blur-2xl transition-opacity duration-500 ${
-                isActive ? 'opacity-30' : 'opacity-0'
+                isActive ? "opacity-30" : "opacity-0"
               }`}
               style={{ background: step.color }}
             ></div>

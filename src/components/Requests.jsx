@@ -44,7 +44,6 @@ const Requests = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-[#FFE4D1] to-[#c26328] px-6 pb-20 pt-14">
-
         {/* Page Heading Shimmer */}
         <div className="section-heading mb-14 text-center">
           <div className="h-10 w-80 bg-white/40 rounded-lg mx-auto mb-4 animate-pulse"></div>
@@ -53,7 +52,6 @@ const Requests = () => {
 
         {/* Card Shimmer Grid */}
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-
           {[1, 2, 3, 4, 5, 6].map((i) => (
             <div
               key={i}
@@ -90,7 +88,6 @@ const Requests = () => {
             </div>
           ))}
         </div>
-
       </div>
     );
   }
@@ -131,9 +128,7 @@ const Requests = () => {
   // ------------------------------------------------------------
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FFE4D1] to-[#c26328] px-6 pb-20 pt-14">
-      
       <div className="section-heading mb-14">
-
         <h2 className="section-title mt-5 text-4xl md:text-5xl lg:text-6xl font-bold text-center text-[#010D3E] max-w-4xl mx-auto leading-tight md:whitespace-nowrap">
           Your{" "}
           <span className="bg-gradient-to-r from-[#ff734d] to-[#d64000] text-transparent bg-clip-text">
@@ -142,7 +137,8 @@ const Requests = () => {
         </h2>
 
         <p className="section-description mt-4 text-lg text-center text-[#000000] max-w-3xl mx-auto leading-relaxed">
-          Review incoming invites and grow your professional developer network with meaningful collaborations.
+          Review incoming invites and grow your professional developer network
+          with meaningful collaborations.
         </p>
       </div>
 
@@ -185,7 +181,9 @@ const Requests = () => {
 
               {(u.age || u.gender) && (
                 <p className="text-sm text-[#000000]/60 mt-1">
-                  {u.age && u.gender ? `${u.age}, ${u.gender}` : u.age || u.gender}
+                  {u.age && u.gender
+                    ? `${u.age}, ${u.gender}`
+                    : u.age || u.gender}
                 </p>
               )}
 
@@ -212,7 +210,6 @@ const Requests = () => {
           );
         })}
       </div>
-
     </div>
   );
 };

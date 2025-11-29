@@ -93,11 +93,11 @@ const Login = () => {
 
   const user = useSelector((store) => store.user);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate("/feed");
-  //   }
-  // }, [user, navigate]);
+  useEffect(() => {
+    if (user) {
+      navigate("/feed");
+    }
+  }, [user, navigate]);
 
   // --- API Handlers ---
   const handleLogin = async (e) => {
@@ -124,16 +124,17 @@ const Login = () => {
         { withCredentials: true }
       );
       dispatch(addUser(res?.data?.data));
-      navigate("/profile/edit");
+      // navigate("/profile/edit");
     } catch (err) {
       setError(err?.response?.data || "Something went wrong during sign up.");
     }
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#FFE8D6] to-[#bc6a30]
-">
-      
+    <div
+      className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#FFE8D6] to-[#bc6a30]
+"
+    >
       {/* The main authentication card */}
       <div className="relative z-10 w-full max-w-md animate-fade-in mt-15">
         <div className="rounded-2xl border border-[rgba(255,115,77,0.2)] bg-white/90 backdrop-blur-sm shadow-2xl shadow-[rgba(255,115,77,0.1)] p-8">

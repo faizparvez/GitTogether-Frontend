@@ -18,13 +18,10 @@ const DeveloperCard = ({ developer, position, rotation, animationDelay }) => {
             alt={developer.name}
           />
           <h3 className="font-bold text-[#010D3E] text-2xl lg:text-lg">
-  {developer.name}
-</h3>
+            {developer.name}
+          </h3>
 
-<p className="text-[#000000] text-sm lg:text-xs">
-  {developer.role}
-</p>
-
+          <p className="text-[#000000] text-sm lg:text-xs">{developer.role}</p>
         </div>
       </div>
     </div>
@@ -38,28 +35,28 @@ const Hero = () => {
 
   const developers = [
     {
-      name: "Priya Sharma",
+      name: "Dev Kulkarni",
       role: "Full Stack Developer",
       imageUrl:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&h=150&auto=format&fit=crop",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUnef9SebT33vrdmMHy11OOprc1JaQQVfORA&s",
     },
     {
       name: "Rohan Patel",
       role: "Frontend Engineer",
       imageUrl:
-        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&h=150&auto=format&fit=crop",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIsj6C74yPqYq77nP0GI-a1IV0Z7w-sz0NnA&s",
     },
     {
-      name: "Aisha Khan",
+      name: "Priya Sharma",
       role: "Backend Developer",
       imageUrl:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&h=150&auto=format&fit=crop",
+        "https://www.shutterstock.com/image-photo/close-portrait-beautiful-young-attractive-260nw-1381098335.jpg",
     },
     {
       name: "Vikram Singh",
       role: "DevOps Engineer",
       imageUrl:
-        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=150&h=150&auto=format&fit=crop",
+        "https://i.pinimg.com/736x/7b/dc/8d/7bdc8da0106505d612f61e32e4184bd9.jpg",
     },
   ];
 
@@ -74,7 +71,6 @@ const Hero = () => {
 
   return (
     <main className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#FFF7F2] to-[#FFDCC2] px-6 md:px-8 lg:px-12 py-8">
-      
       {/* Floating Developer Cards */}
       <DeveloperCard
         developer={developers[0]}
@@ -110,9 +106,9 @@ const Hero = () => {
               key={currentWordIndex}
               className="inline-block word-slide-animation bg-gradient-to-r from-[#ff734d] to-[#d64000]"
               style={{
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
               }}
             >
               {animatedWords[currentWordIndex]}
@@ -133,7 +129,10 @@ const Hero = () => {
           </p>
         </div>
 
-        <button onClick={() => navigate("/login")} className="cursor-pointer bg-gradient-to-r from-[#ff734d] to-[#d64000] text-white font-bold px-10 py-4 lg:px-12 lg:py-5 rounded-xl text-lg lg:text-xl shadow-xl shadow-[rgba(255,115,77,0.25)] hover:scale-105 hover:opacity-90 transition-all duration-300 hover:shadow-2xl hover:shadow-[rgba(255,115,77,0.3)]">
+        <button
+          onClick={() => navigate("/login")}
+          className="cursor-pointer bg-gradient-to-r from-[#ff734d] to-[#d64000] text-white font-bold px-10 py-4 lg:px-12 lg:py-5 rounded-xl text-lg lg:text-xl shadow-xl shadow-[rgba(255,115,77,0.25)] hover:scale-105 hover:opacity-90 transition-all duration-300 hover:shadow-2xl hover:shadow-[rgba(255,115,77,0.3)]"
+        >
           Discover Profiles
         </button>
       </div>

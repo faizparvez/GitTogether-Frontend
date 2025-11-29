@@ -57,15 +57,12 @@ const UserProfile = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FFE8D6] to-[#bc6a30] pt-25 pb-10 relative">
-      
       <div className="relative max-w-5xl mx-auto px-4">
         {/* Main Profile Card */}
         <div className="rounded-lg border border-[rgba(255,115,77,0.2)] bg-white/90 shadow-xl backdrop-blur-sm">
-          
           {/* Header Section */}
           <div className="p-8 border-b border-[rgba(255,115,77,0.15)]">
             <div className="flex flex-col sm:flex-row gap-6 items-start">
-              
               {/* Avatar */}
               <img
                 src={profile.photoURL}
@@ -76,7 +73,6 @@ const UserProfile = () => {
               {/* Info */}
               <div className="flex-1 min-w-0">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-3">
-                  
                   <div>
                     <h1 className="text-3xl ml-6 font-bold text-[#010D3E] tracking-tight mb-2">
                       {profile.firstName} {profile.lastName}
@@ -114,14 +110,13 @@ const UserProfile = () => {
                 {/* Email */}
                 {isOwnProfile && profile.email && (
                   <div className="mt-4 pt-4 border-t border-[rgba(255,115,77,0.2)]">
-                <InfoItem
-                        icon={Mail}
-                        iconColor="#ff734d"
-                        label="Email"
-                        value={profile.email}
-                      />  
+                    <InfoItem
+                      icon={Mail}
+                      iconColor="#ff734d"
+                      label="Email"
+                      value={profile.email}
+                    />
                   </div>
-                
                 )}
               </div>
             </div>
@@ -130,10 +125,8 @@ const UserProfile = () => {
           {/* Content Section */}
           <div className="p-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
               {/* LEFT COLUMN */}
               <div className="lg:col-span-2 space-y-8">
-
                 {/* About */}
                 {profile.about && (
                   <div>
@@ -183,7 +176,6 @@ const UserProfile = () => {
 
               {/* RIGHT COLUMN */}
               <div className="space-y-6">
-
                 {/* Looking For */}
                 {profile.lookingFor?.length > 0 && (
                   <div className="rounded-lg border border-[rgba(255,115,77,0.2)] bg-white/90 p-6 backdrop-blur-sm shadow-sm">
@@ -194,7 +186,10 @@ const UserProfile = () => {
 
                     <div className="space-y-2">
                       {profile.lookingFor.map((item) => (
-                        <div key={item} className="text-sm text-[#000000]/80 flex items-center gap-2">
+                        <div
+                          key={item}
+                          className="text-sm text-[#000000]/80 flex items-center gap-2"
+                        >
                           <div className="w-1.5 h-1.5 rounded-full bg-[#ff734d]"></div>
                           {item}
                         </div>
@@ -241,13 +236,18 @@ const UserProfile = () => {
 
                     {profile.createdAt && (
                       <div>
-                        <p className="text-xs text-[#000000]/60 mb-1">Member Since</p>
+                        <p className="text-xs text-[#000000]/60 mb-1">
+                          Member Since
+                        </p>
                         <p className="text-sm font-medium text-[#010D3E] flex items-center gap-2">
                           <Calendar className="w-3 h-3 text-[#ff734d]" />
-                          {new Date(profile.createdAt).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "long",
-                          })}
+                          {new Date(profile.createdAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              year: "numeric",
+                              month: "long",
+                            }
+                          )}
                         </p>
                       </div>
                     )}
@@ -324,12 +324,9 @@ const UserProfile = () => {
                     </div>
                   </div>
                 </div>
-
               </div>
-
             </div>
           </div>
-
         </div>
       </div>
     </div>
