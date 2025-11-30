@@ -97,7 +97,7 @@ const Login = () => {
     if (user) {
       navigate("/feed");
     }
-  }, [user, navigate]);
+  }, []);
 
   // --- API Handlers ---
   const handleLogin = async (e) => {
@@ -124,7 +124,7 @@ const Login = () => {
         { withCredentials: true }
       );
       dispatch(addUser(res?.data?.data));
-      // navigate("/profile/edit");
+      navigate("/profile/edit");
     } catch (err) {
       setError(err?.response?.data || "Something went wrong during sign up.");
     }

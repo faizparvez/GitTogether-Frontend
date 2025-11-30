@@ -16,7 +16,7 @@ const Header = () => {
   // --- API and Event Handlers ---
   const handleLogout = async () => {
     try {
-      await axios.post(`${BASE_URL}/logout`, {}, { withCredentials: true });
+      await axios.post(`${BASE_URL}/logout`, { user }, { withCredentials: true });
       dispatch(removeUser());
       dispatch(removeFeed());
       navigate("/");

@@ -50,7 +50,7 @@ const UserProfile = () => {
 
   if (!profile)
     return (
-      <div className="min-h-screen bg-[#EAEEFE] flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-[#FFE8D6] to-[#bc6a30] flex items-center justify-center">
         <p className="text-[#010D3E]">Profile not found</p>
       </div>
     );
